@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "ContainerDefinitions": [
+        {
+            "name": "client",
+            "image": "gopusharma/multi-client",
+            "host": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "gopusharma/multi-server",
+            "host": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "gopusharma/multi-worker",
+            "host": "worker",
+            "essential":false
+        },
+        {
+            "name": "nginx",
+            "image": "gopusharma/multi-nginx",
+            "host": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["server","client"]
+        }
+    ]
+}

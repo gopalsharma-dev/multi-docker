@@ -22,3 +22,15 @@ after_success:
   - docker push gopusharma/multi-nginx
   - docker push gopusharma/multi-server
   - docker push gopusharma/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'ap-south-1'
+  app: 'multi-docker'
+  env: 'MultiDocker-env'
+  bucket_name: 'elasticbeanstalk-ap-south-1-178924835438'
+  bucket_path: 'docker-multi'
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
